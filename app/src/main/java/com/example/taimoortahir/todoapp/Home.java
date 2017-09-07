@@ -40,6 +40,8 @@ public class Home extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbar.setTitle("Daily Tasks");
 
+
+
         dbhelper = new DBHelper(this);
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
 

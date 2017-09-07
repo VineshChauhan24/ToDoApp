@@ -37,7 +37,7 @@ public class TaskInput extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_input);
 
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         task = (TextView) findViewById(R.id.task_txt);
         t_date = (TextView) findViewById(R.id.date_txt);
