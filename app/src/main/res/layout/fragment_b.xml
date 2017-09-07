@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/alarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Alarm"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginTop="30sp"
+        android:layout_marginBottom="20sp"
+        android:layout_marginLeft="30sp"/>
+
+    <TextView
+        android:id="@+id/date_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/alarm"
+        android:layout_marginTop="20sp"
+        android:text="Date"
+        android:textSize="20sp"
+        android:layout_marginBottom="30sp"
+        android:layout_alignLeft="@+id/alarm"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/time_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:textSize="20sp"
+        android:clickable="true"
+        android:layout_alignBaseline="@+id/date_txt"
+        android:layout_alignBottom="@+id/date_txt"
+        android:layout_toEndOf="@+id/alarm"
+        android:layout_marginStart="54dp" />
+
+    <TextView
+        android:id="@+id/date_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/date_txt"
+        android:layout_marginBottom="20sp"
+        android:layout_alignStart="@+id/date_txt"/>
+
+    <TextView
+        android:id="@+id/time_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/time_txt"
+        android:layout_alignStart="@+id/time_txt"
+        android:layout_alignBaseline="@+id/date_edittext"/>
+
+        <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/message"
+            android:layout_below="@+id/date_edittext"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="20sp"/>
+</RelativeLayout>

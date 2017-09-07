@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.taimoortahir.todoapp.Signup"
+    android:background="@color/theme_blue">
+
+    <EditText
+        android:id="@+id/f_name"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="First Name"
+        android:textColor="@color/dark_grey"
+        android:textColorHint="@color/dark_grey"
+        android:layout_above="@+id/l_name"
+        android:layout_alignStart="@+id/l_name"
+        android:layout_marginBottom="20dp" />
+
+    <EditText
+        android:id="@+id/l_name"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Last Name"
+        android:textColor="@color/dark_grey"
+        android:textColorHint="@color/dark_grey"
+        android:layout_above="@+id/email_signup"
+        android:layout_alignStart="@+id/email_signup"
+        android:layout_marginBottom="21dp" />
+
+    <EditText
+        android:id="@+id/email_signup"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:textColor="@color/dark_grey"
+        android:textColorHint="@color/dark_grey"
+        android:layout_above="@+id/pasword_signup"
+        android:layout_alignStart="@+id/pasword_signup"
+        android:layout_marginBottom="22dp"
+        android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:id="@+id/pasword_signup"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:textColor="@color/dark_grey"
+        android:textColorHint="@color/dark_grey"
+        android:inputType="textPassword"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/c_pasword_signup" />
+
+    <EditText
+        android:id="@+id/c_pasword_signup"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Password"
+        android:textColor="@color/dark_grey"
+        android:textColorHint="@color/dark_grey"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/pasword_signup"
+        android:layout_alignStart="@+id/signup_signup"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/signup_signup"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Sign up"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="66dp"
+        android:textColor="@color/black"
+        android:background="@drawable/mybutton_2"/>
+</RelativeLayout>

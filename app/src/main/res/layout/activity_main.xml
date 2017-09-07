@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.taimoortahir.todoapp.MainActivity"
+    android:background="@color/theme_blue">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="180dp"
+        android:src="@drawable/todolist"
+        android:id="@+id/imageView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:layout_below="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_text"
+        android:textColor="@color/white"
+        android:layout_below="@+id/welcome"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView"
+        android:textSize="17dp"/>
+
+    <Button
+        android:id="@+id/signup_btn"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:text="Sign up"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/mybutton_2"
+        android:textColor="@color/black"
+        android:layout_above="@+id/login_btn"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log in"
+        android:layout_marginBottom="37dp"
+        android:background="@drawable/mybutton"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/signup_btn"
+        android:layout_alignEnd="@+id/signup_btn" />
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:gravity="center"-->
+        <!--android:weightSum="10"-->
+        <!--android:layout_margin="20dp"-->
+        <!--android:id="@+id/linearLayout">-->
+
+        <!--<Button-->
+            <!--android:id="@+id/login_btn"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="login"-->
+            <!--android:layout_weight = "5"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:textColor="@color/dark_grey"-->
+            <!--android:background="@drawable/login_signup_button"/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/signup_btn"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="signup"-->
+            <!--android:layout_weight="5"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:textColor="@color/dark_grey"-->
+            <!--android:background="@drawable/login_signup_button"/>-->
+
+    <!--</LinearLayout>-->
+
+</RelativeLayout>
