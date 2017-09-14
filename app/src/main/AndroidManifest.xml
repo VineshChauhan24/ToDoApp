@@ -27,11 +27,16 @@
         <activity android:name=".Signup" />
         <activity android:name=".TaskInput" />
 
-        <service android:name=".AlarmService"
-            android:enabled="true"/>
+        <service
+            android:name=".AlarmService"
+            android:enabled="true" />
 
-        <receiver android:name=".BroadcastReciever"/>
+        <receiver android:name=".BroadcastReciever" />
 
+        <activity
+            android:name=".InputTask"
+            android:label="@string/title_activity_input_task"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

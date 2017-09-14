@@ -15,12 +15,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.example.taimoortahir.todoapp.R.id.fab;
+
 public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, TaskAdapter.onBack {
+        implements NavigationView.OnNavigationItemSelectedListener, TaskAdapter.onBack, View.OnClickListener {
 
     ArrayList<Task> taskList = new ArrayList<>();
     DBHelper dbhelper;
@@ -32,6 +36,11 @@ public class Home extends AppCompatActivity
     String MyPreferences = "MyPrefs";
     SharedPreferences sharedPreferences;
 
+    LinearLayout layout_linear;
+    FloatingActionButton fab_bb;
+
+    Button delete_btn, cancel_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,17 +48,23 @@ public class Home extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Daily Tasks");
-
-
+        getSupportActionBar().setTitle("Daily Tasks");
 
         dbhelper = new DBHelper(this);
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        layout_linear = (LinearLayout) findViewById(R.id.layout_options);
+
+        delete_btn = (Button) findViewById(R.id.delete_button);
+        cancel_btn = (Button) findViewById(R.id.cancel_button);
+        cancel_btn.setOnClickListener(this);
+        delete_btn.setOnClickListener(this);
+
+        fab_bb = (FloatingActionButton) findViewById(R.id.fab);
+        fab_bb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home.this, TaskInput.class);
+                Intent intent = new Intent(Home.this, InputTask.class);
                 startActivity(intent);
 
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -83,16 +98,16 @@ public class Home extends AppCompatActivity
         prepareTaskData();
     }
 
+
     private void prepareTaskData() {
 
         taskList.addAll(dbhelper.getAllTask());
 
-        tAdapter = new TaskAdapter(taskList, this);
+        tAdapter = new TaskAdapter(taskList, this,this);
         recyclerView.setAdapter(tAdapter);
 
         tAdapter.notifyDataSetChanged();
     }
-
 
     @Override
     public void onBackPressed() {
@@ -106,7 +121,16 @@ public class Home extends AppCompatActivity
 
     @Override
     public void myclicklistener(Task t) {
+        // TODO: 14/09/2017 check linear layout here/////
+        layout_linear.setVisibility(View.VISIBLE);
+        fab_bb.setVisibility(View.INVISIBLE);
 
+    }
+
+    @Override
+    public void myDelete(Task d, int position) {
+        taskList.remove(d);
+        tAdapter.notifyItemRemoved(position);
     }
 
     @Override
@@ -126,8 +150,8 @@ public class Home extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
+//            Intent intent = new Intent(this, Login.class);
+//            startActivity(intent);
             finish();
             return true;
         }
@@ -157,4 +181,14 @@ public class Home extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.cancel_button){
+            layout_linear.setVisibility(View.INVISIBLE);
+            fab_bb.setVisibility(View.VISIBLE);
+        }
+        else if(view.getId() == R.id.delete_button) {
+
+        }
+    }
 }

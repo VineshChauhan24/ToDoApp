@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context="com.example.taimoortahir.todoapp.TaskInput">
+
+    <!--<include-->
+        <!--layout="@layout/toolbar"/>-->
 
     <RelativeLayout
         android:id="@+id/upper_layout"
@@ -33,16 +35,6 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:textSize="20dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/upper_layout">
-
-        <include layout="@layout/fragment_b" />
 
     </RelativeLayout>
 

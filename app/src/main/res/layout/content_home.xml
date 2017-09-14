@@ -10,8 +10,34 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
+        tools:listitem="@layout/task_row_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </android.support.v7.widget.RecyclerView>
 
+    <LinearLayout
+        android:id="@+id/layout_options"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:weightSum="10"
+        android:background="@color/white_grey"
+        android:visibility="gone">
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="DELETE"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:textSize="20sp"/>
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="CANCEL"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:textSize="20sp"/>
+    </LinearLayout>
 </RelativeLayout>

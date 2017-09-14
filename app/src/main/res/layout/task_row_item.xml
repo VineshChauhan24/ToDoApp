@@ -1,23 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:paddingTop="10dp"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:paddingBottom="10dp">
+    card_view:cardUseCompatPadding="true"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue_light">
 
     <TextView
         android:id="@+id/task_txt"
-        android:text="23"
+        tools:text="23"
+        android:textSize="25sp"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="10dp"/>
 
    <TextView
        android:id="@+id/desc_txt"
+       tools:text="this is the description of our task"
+       android:textColor="@color/white"
+       android:textSize="20sp"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_below="@+id/task_txt"/>
+       android:layout_below="@+id/task_txt"
+       android:layout_marginTop="10dp"
+       android:layout_marginBottom="10dp"
+       android:paddingLeft="10dp"/>
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/item_delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE"
+        android:layout_below="@+id/desc_txt"
+        android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
