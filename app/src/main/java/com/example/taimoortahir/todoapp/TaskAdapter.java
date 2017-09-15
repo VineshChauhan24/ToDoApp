@@ -67,7 +67,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
             public boolean onLongClick(View view) {
 //                Toast.makeText(context, "Long clicked!", Toast.LENGTH_SHORT).show();
 //                holder.fab_b.setVisibility(View.INVISIBLE);
-                ob.myclicklistener(task);
+                ob.myclicklistener(task, position);
                 return true;
             }
         });
@@ -75,7 +75,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
         holder.task.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ob.myclicklistener(task);
+                ob.myclicklistener(task, position);
             }
         });
 
@@ -96,7 +96,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
 
     public interface onBack{
 
-        public void myclicklistener(Task m);
+        public void myclicklistener(Task m, int position);
         public void myDelete(Task d, int position);
     }
 }

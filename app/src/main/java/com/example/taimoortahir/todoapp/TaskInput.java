@@ -141,7 +141,7 @@ public class TaskInput extends AppCompatActivity implements View.OnClickListener
     };
 
     @Override
-    public void myclicklistener(Task m) {
+    public void myclicklistener(Task m, int position) {
 
     }
 

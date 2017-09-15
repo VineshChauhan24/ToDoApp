@@ -1,18 +1,24 @@
 package com.example.taimoortahir.todoapp;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.HorizontalScrollView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -33,7 +39,10 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     TaskAdapter tAdapter;
     RecyclerView recyclerView;
     ArrayList<Task> taskList = new ArrayList<>();
+    ArrayList<Task> dayList = new ArrayList<>();
     RelativeLayout r;
+    RecyclerView dayRecycler;
+    DayAdapter dAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,8 +151,18 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     }
 
     private void updateDate() {
-        new DatePickerDialog(InputTask.this, d, dateTime.get(Calendar.YEAR), dateTime.get(Calendar.MONTH),
-                dateTime.get(Calendar.DAY_OF_MONTH)).show();
+        View customView = getLayoutInflater().inflate(R.layout.day_dialog, null);
+//        Button btnShow = (Button) customView.findViewById(R.id.btnSubmit);
+        AlertDialog.Builder custom = new AlertDialog.Builder(this);
+        custom.setView(customView);
+        custom.setCancelable(true);
+        final AlertDialog d = custom.show();
+        dayRecycler = (RecyclerView) findViewById(R.id.recycler_day);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        dayRecycler.setLayoutManager(mLayoutManager);
+        dAdapter = new DayAdapter(InputTask.this, dayList);
+        dayRecycler.setAdapter(dAdapter);
+        dAdapter.notifyDataSetChanged();
     }
 
     private void updateTime() {
@@ -173,7 +192,7 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     };
 
     @Override
-    public void myclicklistener(Task m) {
+    public void myclicklistener(Task m, int position) {
 
     }
 

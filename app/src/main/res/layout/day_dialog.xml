@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/select_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Day for your Task!"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/select_textview">
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>

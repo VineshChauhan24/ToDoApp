@@ -41,6 +41,9 @@ public class Home extends AppCompatActivity
 
     Button delete_btn, cancel_btn;
 
+    Task task_temp;
+    int position_temp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,16 +123,17 @@ public class Home extends AppCompatActivity
     }
 
     @Override
-    public void myclicklistener(Task t) {
-        // TODO: 14/09/2017 check linear layout here/////
+    public void myclicklistener(Task t, int position) {
         layout_linear.setVisibility(View.VISIBLE);
         fab_bb.setVisibility(View.INVISIBLE);
-
+        task_temp = t;
+        position_temp = position;
     }
 
     @Override
     public void myDelete(Task d, int position) {
         taskList.remove(d);
+        dbhelper.deleteTasksTable(d);
         tAdapter.notifyItemRemoved(position);
     }
 
@@ -188,7 +192,9 @@ public class Home extends AppCompatActivity
             fab_bb.setVisibility(View.VISIBLE);
         }
         else if(view.getId() == R.id.delete_button) {
-
+            myDelete(task_temp, position_temp);
+            layout_linear.setVisibility(View.INVISIBLE);
+            fab_bb.setVisibility(View.VISIBLE);
         }
     }
 }
