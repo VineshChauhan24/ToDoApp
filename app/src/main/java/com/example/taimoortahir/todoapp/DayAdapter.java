@@ -18,7 +18,7 @@ import java.util.List;
 public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
 
     private Context mContext;
-    private ArrayList<Task> dayList;
+    private ArrayList<DayModel> dayList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public ImageView image;
@@ -28,7 +28,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
         }
     }
 
-    public DayAdapter(Context myContext, ArrayList<Task> mydayList){
+    public DayAdapter(Context myContext, ArrayList<DayModel> mydayList){
         this.mContext = myContext;
         this.dayList = mydayList;
     }
@@ -43,6 +43,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final DayModel day = dayList.get(position);
+        holder.image.setImageResource(day.getImage());
     }
 
     @Override

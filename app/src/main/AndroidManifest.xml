@@ -36,7 +36,8 @@
         <activity
             android:name=".InputTask"
             android:label="@string/title_activity_input_task"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".DayDialog"></activity>
     </application>
 
 </manifest>

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.renderscript.ScriptGroup;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,7 +38,7 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     TaskAdapter tAdapter;
     RecyclerView recyclerView;
     ArrayList<Task> taskList = new ArrayList<>();
-    ArrayList<Task> dayList = new ArrayList<>();
+    ArrayList<DayModel> dayList = new ArrayList<>();
     RelativeLayout r;
     RecyclerView dayRecycler;
     DayAdapter dAdapter;
@@ -144,6 +143,28 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
         }
     }
 
+    private void prepareDayList(){
+        DayModel d = new DayModel();
+        d.setImage(R.drawable.message);
+        dayList.add(d);
+
+        d = new DayModel();
+        d.setImage(R.drawable.message);
+        dayList.add(d);
+
+        d = new DayModel();
+        d.setImage(R.drawable.message);
+        dayList.add(d);
+
+        d = new DayModel();
+        d.setImage(R.drawable.message);
+        dayList.add(d);
+
+        d = new DayModel();
+        d.setImage(R.drawable.message);
+        dayList.add(d);
+    }
+
     private void validateFields(){
         if (txt1.getText().toString() == "" || txt2.getText().toString() == ""){
             Toast.makeText(this, "Select both Date & Time!", Toast.LENGTH_SHORT).show();
@@ -151,15 +172,13 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     }
 
     private void updateDate() {
-        View customView = getLayoutInflater().inflate(R.layout.day_dialog, null);
-//        Button btnShow = (Button) customView.findViewById(R.id.btnSubmit);
-        AlertDialog.Builder custom = new AlertDialog.Builder(this);
-        custom.setView(customView);
-        custom.setCancelable(true);
-        final AlertDialog d = custom.show();
-        dayRecycler = (RecyclerView) findViewById(R.id.recycler_day);
+        final Dialog openDialog = new Dialog(this);
+        openDialog.setContentView(R.layout.activity_day_dialog);
+        openDialog.show();
+        dayRecycler = (RecyclerView) openDialog.findViewById(R.id.recycler_day);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         dayRecycler.setLayoutManager(mLayoutManager);
+        prepareDayList();
         dAdapter = new DayAdapter(InputTask.this, dayList);
         dayRecycler.setAdapter(dAdapter);
         dAdapter.notifyDataSetChanged();
