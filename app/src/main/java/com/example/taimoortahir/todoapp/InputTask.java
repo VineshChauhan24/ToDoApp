@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -41,9 +42,12 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     RecyclerView recyclerView;
     ArrayList<Task> taskList = new ArrayList<>();
     ArrayList<DayModel> dayList = new ArrayList<>();
+    ArrayList<CategoryModel> categoryList = new ArrayList<>();
     RelativeLayout r;
     RecyclerView dayRecycler;
+    RecyclerView categoryRecycler;
     DayAdapter dAdapter;
+    CategoryAdapter cAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +148,7 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
 
     private void prepareDayList(){
         // list of data items
+        dayList.clear();
         DayModel day1 = new DayModel("Sunday");
         dayList.add(day1);
 
@@ -166,6 +171,25 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
         dayList.add(day7);
     }
 
+    private void prepareCategoryList(){
+        // list of data items
+        categoryList.clear();
+        CategoryModel task1 = new CategoryModel(R.drawable.message,"Dinning");
+        categoryList.add(task1);
+
+        CategoryModel task2 = new CategoryModel(R.drawable.message,"Exercise");
+        categoryList.add(task2);
+
+        CategoryModel task3 = new CategoryModel(R.drawable.message,"Sleep");
+        categoryList.add(task3);
+
+        CategoryModel task4 = new CategoryModel(R.drawable.message,"Work");
+        categoryList.add(task4);
+
+        CategoryModel task5 = new CategoryModel(R.drawable.message,"Enjoy");
+        categoryList.add(task5);
+    }
+
     private void updateDate() {
         final Dialog openDialog = new Dialog(this);
         openDialog.setContentView(R.layout.activity_day_dialog);
@@ -174,14 +198,22 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         dayRecycler.setLayoutManager(mLayoutManager);
         prepareDayList();
-        dAdapter = new DayAdapter(InputTask.this, dayList);
+        dAdapter = new DayAdapter(InputTask.this, dayList, openDialog, txt1);
         dayRecycler.setAdapter(dAdapter);
         dAdapter.notifyDataSetChanged();
     }
 
     private void updateTime() {
-        new TimePickerDialog(InputTask.this, t, dateTime.get(Calendar.HOUR_OF_DAY), dateTime.get(Calendar.MINUTE),
-                true).show();
+        final Dialog openDialog = new Dialog(this);
+        openDialog.setContentView(R.layout.activity_category_dialog);
+        openDialog.show();
+        categoryRecycler = (RecyclerView) openDialog.findViewById(R.id.recycler_category);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        categoryRecycler.setLayoutManager(mLayoutManager);
+        prepareCategoryList();
+        cAdapter = new CategoryAdapter(InputTask.this, categoryList, openDialog, txt2);
+        categoryRecycler.setAdapter(cAdapter);
+        cAdapter.notifyDataSetChanged();
     }
 
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
