@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/select_textview"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select Day for your Task!"
         android:textSize="30sp"
@@ -19,7 +19,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_day"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/select_textview"
         tools:listitem="@layout/day_dialog_item">

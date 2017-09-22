@@ -5,20 +5,20 @@ package com.example.taimoortahir.todoapp;
  */
 
 public class DayModel {
-    int image;
+    String weekDay;
 
     public DayModel(){
     }
 
-    public DayModel(int image) {
-        this.image = image;
+    public DayModel(String weekDay) {
+        this.weekDay = weekDay;
     }
 
-    public int getImage() {
-        return image;
+    public String getweekDay() {
+        return weekDay;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setweekDay(String weekDay) {
+        this.weekDay = weekDay;
     }
 }

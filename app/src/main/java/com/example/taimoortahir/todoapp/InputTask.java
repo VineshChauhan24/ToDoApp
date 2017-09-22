@@ -3,9 +3,9 @@ package com.example.taimoortahir.todoapp;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,15 +17,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.HorizontalScrollView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 public class InputTask extends AppCompatActivity implements View.OnClickListener, TaskAdapter.onBack {
 
@@ -64,8 +66,6 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
         t_date.setOnClickListener(this);
         t_time.setOnClickListener(this);
         btn.setOnClickListener(this);
-
-
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -121,7 +121,6 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
                 Toast.makeText(this, "Select both Date & Time!", Toast.LENGTH_SHORT).show();
             }
             else{
-//                validateFields();
                 db_helper = new DBHelper(this);
                 Task t = new Task();
                 data = task.getText().toString();
@@ -144,31 +143,27 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     }
 
     private void prepareDayList(){
-        DayModel d = new DayModel();
-        d.setImage(R.drawable.message);
-        dayList.add(d);
+        // list of data items
+        DayModel day1 = new DayModel("Sunday");
+        dayList.add(day1);
 
-        d = new DayModel();
-        d.setImage(R.drawable.message);
-        dayList.add(d);
+        DayModel day2 = new DayModel("Monday");
+        dayList.add(day2);
 
-        d = new DayModel();
-        d.setImage(R.drawable.message);
-        dayList.add(d);
+        DayModel day3 = new DayModel("Tuesday");
+        dayList.add(day3);
 
-        d = new DayModel();
-        d.setImage(R.drawable.message);
-        dayList.add(d);
+        DayModel day4 = new DayModel("Wednesday");
+        dayList.add(day4);
 
-        d = new DayModel();
-        d.setImage(R.drawable.message);
-        dayList.add(d);
-    }
+        DayModel day5 = new DayModel("Thursday");
+        dayList.add(day5);
 
-    private void validateFields(){
-        if (txt1.getText().toString() == "" || txt2.getText().toString() == ""){
-            Toast.makeText(this, "Select both Date & Time!", Toast.LENGTH_SHORT).show();
-        }
+        DayModel day6 = new DayModel("Friday");
+        dayList.add(day6);
+
+        DayModel day7 = new DayModel("Saturday");
+        dayList.add(day7);
     }
 
     private void updateDate() {

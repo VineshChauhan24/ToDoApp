@@ -1,12 +1,15 @@
 package com.example.taimoortahir.todoapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.amulyakhare.textdrawable.TextDrawable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
         public ImageView image;
         public MyViewHolder(View itemView) {
             super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.day_imageview);
+            image = (ImageView) itemView.findViewById(R.id.imageView);
         }
     }
 
@@ -43,7 +46,11 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final DayModel day = dayList.get(position);
-        holder.image.setImageResource(day.getImage());
+
+        TextDrawable weekDayImage = TextDrawable.builder()
+                .buildRoundRect(String.valueOf(day.getweekDay().charAt(0)), Color.RED, 10); // radius in px
+
+        holder.image.setImageDrawable(weekDayImage);
     }
 
     @Override

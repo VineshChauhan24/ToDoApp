@@ -1,5 +1,6 @@
 package com.example.taimoortahir.todoapp;
 
+import android.graphics.Color;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ public class DayDialog extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_day_dialog);
 
         dayRecycler = (RecyclerView) findViewById(R.id.recycler_day);
-        dayImage = (ImageView) findViewById(R.id.day_imageview);
+        dayImage = (ImageView) findViewById(R.id.imageView);
         dayImage.setOnClickListener(this);
     }
 

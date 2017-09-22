@@ -12,6 +12,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Button btnLogin, btnSignup;
 
+    public static String TYPE =
+            "Main";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         List<Task> list =  db.getAllTask();
         list.toString();
-
 
     }
 
