@@ -7,21 +7,34 @@
 
     <TextView
         android:id="@+id/select_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select Day for your Task!"
-        android:textSize="30sp"
+        android:text="Day"
+        android:textSize="20sp"
         android:textColor="@color/black"
-        android:layout_centerHorizontal="true"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"/>
+        android:paddingLeft="25dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:background="@color/orange" />
+
+    <TextView
+        android:id="@+id/descrip_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select day for your task"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:paddingLeft="25dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:layout_below="@+id/select_textview"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/select_textview"
-        tools:listitem="@layout/day_dialog_item">
+        android:layout_below="@+id/descrip_textview"
+        tools:listitem="@layout/day_dialog_item"
+        android:layout_marginBottom="20dp">
     </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
     Dialog dayDialog;
     TextView dayText;
     DayModel dayObj;
+    private onBack ob;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public ImageView image;
@@ -38,10 +40,17 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
         }
     }
 
-    public DayAdapter(Context myContext, ArrayList<DayModel> mydayList, Dialog dialog, TextView day){
+    public DayAdapter(Context myContext, ArrayList<DayModel> mydayList){
         this.mContext = myContext;
         this.dayList = mydayList;
-        dayDialog = dialog;
+//        dayDialog = dialog;
+//        dayText = day;
+    }
+
+    public DayAdapter(Context myContext, ArrayList<DayModel> mydayList, TextView day, onBack ob){
+        this.mContext = myContext;
+        this.dayList = mydayList;
+//        dayDialog = dialog;
         dayText = day;
     }
 
@@ -66,14 +75,30 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
     public void onBindViewHolder(MyViewHolder holder, int position) {
         dayObj = dayList.get(position);
 
-        TextDrawable weekDayImage = TextDrawable.builder()
-                .buildRound(String.valueOf(dayObj.getweekDay().charAt(0)), Color.RED); // radius in px
+        ColorGenerator generator = ColorGenerator.MATERIAL;
+        int color1 = generator.getRandomColor();
 
+        TextDrawable.IBuilder builder = TextDrawable.builder()
+                .beginConfig()
+                .endConfig()
+                .round();
+
+//        TextDrawable ic1 = builder.build(dayObj.getweekDay().charAt(0)), color1);
+
+        TextDrawable weekDayImage = builder
+                .build(String.valueOf(dayObj.getweekDay().charAt(0)), color1); // radius in px
+
+        ob.dayClickListener(dayObj.getweekDay());
         holder.image.setImageDrawable(weekDayImage);
     }
 
     @Override
     public int getItemCount() {
         return dayList.size();
+    }
+
+    public interface onBack{
+
+        public void dayClickListener(String s);
     }
 }

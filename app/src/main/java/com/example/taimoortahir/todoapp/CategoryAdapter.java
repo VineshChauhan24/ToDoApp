@@ -26,6 +26,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     Dialog categoryDialog;
     TextView categoryText;
     CategoryModel categoryObj;
+    private onBack ob;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public LinearLayout category;
@@ -38,6 +39,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             category = (LinearLayout) itemView.findViewById(R.id.category_layout);
 //            category.setOnClickListener(this);
         }
+    }
+
+    public CategoryAdapter(Context myContext, ArrayList<CategoryModel> cateList){
+        this.mContext = myContext;
+        this.categoryList = cateList;
+//        categoryDialog = dialog;
+//        categoryText = category;
     }
 
     public CategoryAdapter(Context myContext, ArrayList<CategoryModel> cateList, Dialog dialog, TextView category){
@@ -72,6 +80,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 //        TextDrawable weekDayImage = TextDrawable.builder()
 //                .buildRound(String.valueOf(day.getweekDay().charAt(0)), Color.RED); // radius in px
 
+        ob.categoryClickListener(categoryObj.getImage(), categoryObj.getCategory());
         holder.image.setImageResource(categoryObj.getImage());
         holder.category_text.setText(categoryObj.getCategory());
     }
@@ -79,5 +88,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     @Override
     public int getItemCount() {
         return categoryList.size();
+    }
+
+    public interface onBack{
+
+        public void categoryClickListener(int i, String s);
     }
 }

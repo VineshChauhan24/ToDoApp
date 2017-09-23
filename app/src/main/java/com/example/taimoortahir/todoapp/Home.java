@@ -113,6 +113,12 @@ public class Home extends AppCompatActivity
     }
 
     @Override
+    protected void onResume() {
+        prepareTaskData();
+        super.onResume();
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {

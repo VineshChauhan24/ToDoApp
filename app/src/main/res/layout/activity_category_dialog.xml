@@ -7,21 +7,34 @@
 
     <TextView
         android:id="@+id/select_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select Category of your Task!"
-        android:textSize="30sp"
+        android:text="Category"
+        android:textSize="20sp"
+        android:background="@color/orange"
         android:textColor="@color/black"
-        android:layout_centerHorizontal="true"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"/>
+        android:paddingLeft="25dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"/>
+
+    <TextView
+        android:id="@+id/desc_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select category of your task"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_below="@+id/select_textview"
+        android:paddingLeft="25dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_category"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/select_textview"
-        tools:listitem="@layout/category_dialog_item">
+        android:layout_below="@+id/desc_textview"
+        tools:listitem="@layout/category_dialog_item"
+        android:layout_marginBottom="20dp">
     </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

@@ -44,10 +44,10 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     ArrayList<DayModel> dayList = new ArrayList<>();
     ArrayList<CategoryModel> categoryList = new ArrayList<>();
     RelativeLayout r;
-    RecyclerView dayRecycler;
-    RecyclerView categoryRecycler;
-    DayAdapter dAdapter;
-    CategoryAdapter cAdapter;
+//    RecyclerView dayRecycler;
+//    RecyclerView categoryRecycler;
+//    DayAdapter dAdapter;
+//    CategoryAdapter cAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,10 +135,10 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
 //                Intent alarmIntent = new Intent(this, BroadcastReciever.class);
 //                pendingIntent = PendingIntent.getBroadcast(MyActivity.this, 0, alarmIntent, 0);
 
-                taskList.addAll(db_helper.getAllTask());
-                tAdapter = new TaskAdapter(taskList, InputTask.this, this);
-                recyclerView.setAdapter(tAdapter);
-                tAdapter.notifyDataSetChanged();
+//                taskList.addAll(db_helper.getAllTask());
+//                tAdapter = new TaskAdapter(taskList, InputTask.this, this);
+//                recyclerView.setAdapter(tAdapter);
+//                tAdapter.notifyDataSetChanged();
 
                 finish();
 
@@ -174,46 +174,52 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     private void prepareCategoryList(){
         // list of data items
         categoryList.clear();
-        CategoryModel task1 = new CategoryModel(R.drawable.message,"Dinning");
+        CategoryModel task1 = new CategoryModel(R.drawable.ic_restaurant_red_800_24dp,"Dinning");
         categoryList.add(task1);
 
-        CategoryModel task2 = new CategoryModel(R.drawable.message,"Exercise");
+        CategoryModel task2 = new CategoryModel(R.drawable.ic_directions_run_red_800_24dp,"Exercise");
         categoryList.add(task2);
 
-        CategoryModel task3 = new CategoryModel(R.drawable.message,"Sleep");
+        CategoryModel task3 = new CategoryModel(R.drawable.ic_hotel_red_800_24dp,"Sleep");
         categoryList.add(task3);
 
-        CategoryModel task4 = new CategoryModel(R.drawable.message,"Work");
+        CategoryModel task4 = new CategoryModel(R.drawable.ic_business_center_red_800_24dp,"Work");
         categoryList.add(task4);
 
-        CategoryModel task5 = new CategoryModel(R.drawable.message,"Enjoy");
+        CategoryModel task5 = new CategoryModel(R.drawable.ic_pool_red_800_24dp,"Enjoy");
         categoryList.add(task5);
     }
 
     private void updateDate() {
-        final Dialog openDialog = new Dialog(this);
-        openDialog.setContentView(R.layout.activity_day_dialog);
-        openDialog.show();
-        dayRecycler = (RecyclerView) openDialog.findViewById(R.id.recycler_day);
+        final MyDialog openDialog = new MyDialog(this);
+        prepareDayList();
+        openDialog.mySetContentView(R.layout.activity_day_dialog);
+        openDialog.setDayList(dayList);
+        openDialog.myShow();
+
+        /*dayRecycler = (RecyclerView) openDialog.findViewById(R.id.recycler_day);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         dayRecycler.setLayoutManager(mLayoutManager);
         prepareDayList();
         dAdapter = new DayAdapter(InputTask.this, dayList, openDialog, txt1);
         dayRecycler.setAdapter(dAdapter);
-        dAdapter.notifyDataSetChanged();
+        dAdapter.notifyDataSetChanged();*/
     }
 
     private void updateTime() {
-        final Dialog openDialog = new Dialog(this);
-        openDialog.setContentView(R.layout.activity_category_dialog);
-        openDialog.show();
-        categoryRecycler = (RecyclerView) openDialog.findViewById(R.id.recycler_category);
+        final MyCategoryDialog openDialog = new MyCategoryDialog(this);
+        prepareCategoryList();
+        openDialog.mySetContentView(R.layout.activity_category_dialog);
+        openDialog.setCategoryList(categoryList);
+        openDialog.myShow();
+
+       /* categoryRecycler = (RecyclerView) openDialog.findViewById(R.id.recycler_category);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         categoryRecycler.setLayoutManager(mLayoutManager);
         prepareCategoryList();
         cAdapter = new CategoryAdapter(InputTask.this, categoryList, openDialog, txt2);
         categoryRecycler.setAdapter(cAdapter);
-        cAdapter.notifyDataSetChanged();
+        cAdapter.notifyDataSetChanged();*/
     }
 
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
