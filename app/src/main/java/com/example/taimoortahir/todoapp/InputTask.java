@@ -3,21 +3,15 @@ package com.example.taimoortahir.todoapp;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -26,11 +20,9 @@ import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 
-public class InputTask extends AppCompatActivity implements View.OnClickListener, TaskAdapter.onBack {
+public class InputTask extends AppCompatActivity implements View.OnClickListener, TaskAdapter.onBack, MyCategoryDialog.OnBack, MyDialog.OnBack {
 
     String data;
     TextView t_date, t_time, txt1, txt2, task;
@@ -44,10 +36,6 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     ArrayList<DayModel> dayList = new ArrayList<>();
     ArrayList<CategoryModel> categoryList = new ArrayList<>();
     RelativeLayout r;
-//    RecyclerView dayRecycler;
-//    RecyclerView categoryRecycler;
-//    DayAdapter dAdapter;
-//    CategoryAdapter cAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,14 +58,6 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
         t_date.setOnClickListener(this);
         t_time.setOnClickListener(this);
         btn.setOnClickListener(this);
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
     }
 
     @Override
@@ -135,11 +115,6 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
 //                Intent alarmIntent = new Intent(this, BroadcastReciever.class);
 //                pendingIntent = PendingIntent.getBroadcast(MyActivity.this, 0, alarmIntent, 0);
 
-//                taskList.addAll(db_helper.getAllTask());
-//                tAdapter = new TaskAdapter(taskList, InputTask.this, this);
-//                recyclerView.setAdapter(tAdapter);
-//                tAdapter.notifyDataSetChanged();
-
                 finish();
 
             }
@@ -191,57 +166,45 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     }
 
     private void updateDate() {
-        final MyDialog openDialog = new MyDialog(this);
         prepareDayList();
-        openDialog.mySetContentView(R.layout.activity_day_dialog);
-        openDialog.setDayList(dayList);
-        openDialog.myShow();
 
-        /*dayRecycler = (RecyclerView) openDialog.findViewById(R.id.recycler_day);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-        dayRecycler.setLayoutManager(mLayoutManager);
-        prepareDayList();
-        dAdapter = new DayAdapter(InputTask.this, dayList, openDialog, txt1);
-        dayRecycler.setAdapter(dAdapter);
-        dAdapter.notifyDataSetChanged();*/
+        MyDialog openDialog = new MyDialog(this);
+        openDialog.setDayList(dayList);
+        openDialog.onOptionSelected(this);
+        openDialog.show();
+
     }
 
     private void updateTime() {
-        final MyCategoryDialog openDialog = new MyCategoryDialog(this);
         prepareCategoryList();
-        openDialog.mySetContentView(R.layout.activity_category_dialog);
+
+        MyCategoryDialog openDialog = new MyCategoryDialog(this);
         openDialog.setCategoryList(categoryList);
+        openDialog.onOptionSelected(this);
         openDialog.myShow();
 
-       /* categoryRecycler = (RecyclerView) openDialog.findViewById(R.id.recycler_category);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        categoryRecycler.setLayoutManager(mLayoutManager);
-        prepareCategoryList();
-        cAdapter = new CategoryAdapter(InputTask.this, categoryList, openDialog, txt2);
-        categoryRecycler.setAdapter(cAdapter);
-        cAdapter.notifyDataSetChanged();*/
     }
 
-    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            dateTime.set(Calendar.YEAR, year);
-            dateTime.set(Calendar.MONTH, month);
-            dateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                txt1.setText(formatDateTime.format(dateTime.getTime()));
-            }
-        }
-    };
-
-    TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            dateTime.set(Calendar.MINUTE, minute);
-            txt2.setText(formatDateTime.format(dateTime.getTime()));
-        }
-    };
+//    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
+//        @Override
+//        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//            dateTime.set(Calendar.YEAR, year);
+//            dateTime.set(Calendar.MONTH, month);
+//            dateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                txt1.setText(formatDateTime.format(dateTime.getTime()));
+//            }
+//        }
+//    };
+//
+//    TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
+//        @Override
+//        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//            dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//            dateTime.set(Calendar.MINUTE, minute);
+//            txt2.setText(formatDateTime.format(dateTime.getTime()));
+//        }
+//    };
 
     @Override
     public void myclicklistener(Task m, int position) {
@@ -251,5 +214,17 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     @Override
     public void myDelete(Task d, int position) {
 
+    }
+
+    @Override
+    public void CategoryItemClickListener(String s, MyCategoryDialog ref) {
+        txt2.setText(s);
+        ref.dismiss();
+    }
+
+    @Override
+    public void DayItemClickListener(String s, MyDialog ref) {
+        txt1.setText(s);
+        ref.dismiss();
     }
 }

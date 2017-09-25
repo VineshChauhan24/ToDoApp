@@ -14,13 +14,15 @@ import java.util.ArrayList;
  * Created by TaimoorTahir on 23/09/2017.
  */
 
-public class MyDialog extends Dialog {
+public class MyDialog extends Dialog implements DayAdapter.OnBack {
 
     RecyclerView dayRecycler;
     DayAdapter dAdapter;
+    private OnBack ob;
 
     public MyDialog(@NonNull Context context) {
         super(context);
+        setContentView(R.layout.activity_day_dialog);
     }
 
     public MyDialog(@NonNull Context context, @StyleRes int themeResId) {
@@ -31,26 +33,36 @@ public class MyDialog extends Dialog {
         super(context, cancelable, cancelListener);
     }
 
-    public void mySetContentView(int contentView){
-        setContentView(contentView);
-    }
-
-    public void myShow(){
-        show();
-    }
-
     public void setDayList(ArrayList<DayModel> list){
+        setAdapter(list);
+    }
 
-        // set dayRecycler here
+    public void setDayList(ArrayList<DayModel> list, OnBack ob){
 
-        dAdapter = new DayAdapter(getContext(), list);
+        onOptionSelected(ob);
+        setAdapter(list);
+    }
+
+    public void onOptionSelected(OnBack ob){
+        this.ob = ob;
+    }
+
+    public void setAdapter(ArrayList<DayModel> list){
+        dayRecycler = (RecyclerView) findViewById(R.id.recycler_day);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        dayRecycler.setLayoutManager(mLayoutManager);
+        dAdapter = new DayAdapter(getContext(), list, this);
         dayRecycler.setAdapter(dAdapter);
         dAdapter.notifyDataSetChanged();
     }
-    
-    public interface onBack{
-        
-        public void myClickListener();
+
+    @Override
+    public void DayClickListener(String s){
+        ob.DayItemClickListener(s, this);
+    }
+
+    public interface OnBack{
+        public void DayItemClickListener(String s, MyDialog ref);
     }
 
 }
