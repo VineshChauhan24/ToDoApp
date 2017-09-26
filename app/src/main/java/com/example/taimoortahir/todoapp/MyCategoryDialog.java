@@ -19,6 +19,7 @@ public class MyCategoryDialog extends Dialog implements CategoryAdapter.OnBack {
     RecyclerView categoryRecycler;
     CategoryAdapter cAdapter;
     private OnBack ob;
+    CategoryModel c_model = new CategoryModel();
 
     public MyCategoryDialog(@NonNull Context context) {
         super(context);
@@ -47,6 +48,10 @@ public class MyCategoryDialog extends Dialog implements CategoryAdapter.OnBack {
         setAdapter(list);
     }
 
+    public void setDefaultCategory(String s){
+        c_model.setCategory(s);
+    }
+
     public void onOptionSelected(OnBack ob){
         this.ob = ob;
     }
@@ -55,7 +60,7 @@ public class MyCategoryDialog extends Dialog implements CategoryAdapter.OnBack {
         categoryRecycler = (RecyclerView) findViewById(R.id.recycler_category);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         categoryRecycler.setLayoutManager(mLayoutManager);
-        cAdapter = new CategoryAdapter(getContext(), list, this);
+        cAdapter = new CategoryAdapter(getContext(), list, this, c_model.getCategory());
         categoryRecycler.setAdapter(cAdapter);
         cAdapter.notifyDataSetChanged();
     }

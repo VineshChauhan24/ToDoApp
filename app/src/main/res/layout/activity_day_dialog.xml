@@ -37,4 +37,5 @@
         tools:listitem="@layout/day_dialog_item"
         android:layout_marginBottom="20dp">
     </android.support.v7.widget.RecyclerView>
+
 </RelativeLayout>

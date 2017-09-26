@@ -3,6 +3,8 @@ package com.example.taimoortahir.todoapp;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -36,6 +39,10 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     ArrayList<DayModel> dayList = new ArrayList<>();
     ArrayList<CategoryModel> categoryList = new ArrayList<>();
     RelativeLayout r;
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    SharedPreferences sharedpreferences;
+    ImageView iv_c;
+    ImageView iv_d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +61,8 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
         txt2 = (TextView) findViewById(R.id.time_edittext);
         btn = (FloatingActionButton) findViewById(R.id.fab_b);
         r = (RelativeLayout) findViewById(R.id.fragmentB);
+        iv_c = (ImageView) findViewById(R.id.imageView_c);
+        iv_d = (ImageView) findViewById(R.id.imageView_d);
 
         t_date.setOnClickListener(this);
         t_time.setOnClickListener(this);
@@ -171,6 +180,7 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
         MyDialog openDialog = new MyDialog(this);
         openDialog.setDayList(dayList);
         openDialog.onOptionSelected(this);
+        openDialog.setDefaultDay("Monday");
         openDialog.show();
 
     }
@@ -181,6 +191,7 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
         MyCategoryDialog openDialog = new MyCategoryDialog(this);
         openDialog.setCategoryList(categoryList);
         openDialog.onOptionSelected(this);
+        openDialog.setDefaultCategory("Monday");
         openDialog.myShow();
 
     }
@@ -218,12 +229,18 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void CategoryItemClickListener(String s, MyCategoryDialog ref) {
+        ref.setDefaultCategory(s);
         txt2.setText(s);
         ref.dismiss();
     }
 
     @Override
     public void DayItemClickListener(String s, MyDialog ref) {
+//        SharedPreferences.Editor editor = sharedpreferences.edit();
+//
+//        editor.putString("Day", s);
+//        editor.commit();
+        ref.setDefaultDay(s);
         txt1.setText(s);
         ref.dismiss();
     }
