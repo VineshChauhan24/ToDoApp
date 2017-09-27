@@ -8,18 +8,18 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
-import static com.example.taimoortahir.todoapp.InputTask.MyPREFERENCES;
 
 
 /**
  * Created by TaimoorTahir on 23/09/2017.
  */
 
-public class MyDialog extends Dialog implements DayAdapter.OnBack {
+public class DayDialog extends Dialog implements DayAdapter.OnBack {
 
     RecyclerView dayRecycler;
     DayAdapter dAdapter;
@@ -27,17 +27,21 @@ public class MyDialog extends Dialog implements DayAdapter.OnBack {
     String MyPreferences = "MyPrefs";
     SharedPreferences sharedpreferences;
     DayModel model = new DayModel();
+    TextView titleTextView;
+    TextView descriptionText;
 
-    public MyDialog(@NonNull Context context) {
+    public DayDialog(@NonNull Context context) {
         super(context);
         setContentView(R.layout.activity_day_dialog);
+        titleTextView = (TextView) findViewById(R.id.title_textview);
+        descriptionText = (TextView) findViewById(R.id.descrip_textview);
     }
 
-    public MyDialog(@NonNull Context context, @StyleRes int themeResId) {
+    public DayDialog(@NonNull Context context, @StyleRes int themeResId) {
         super(context, themeResId);
     }
 
-    protected MyDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
+    protected DayDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
 
@@ -55,11 +59,24 @@ public class MyDialog extends Dialog implements DayAdapter.OnBack {
         this.ob = ob;
     }
 
+
     public void setDefaultDay(String s){
         model.setweekDay(s);
     }
 
-    public void setAdapter(ArrayList<DayModel> list){
+    public void setTitle(String title){
+        titleTextView.setText(title);
+    }
+
+    public void setDescription(String desc){
+        descriptionText.setText(desc);
+    }
+
+    public void setBackgroundcolor(int color){
+        titleTextView.setBackgroundColor(color);
+    }
+
+    private void setAdapter(ArrayList<DayModel> list){
         dayRecycler = (RecyclerView) findViewById(R.id.recycler_day);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         dayRecycler.setLayoutManager(mLayoutManager);
@@ -77,7 +94,7 @@ public class MyDialog extends Dialog implements DayAdapter.OnBack {
     }
 
     public interface OnBack{
-        public void DayItemClickListener(String s, MyDialog ref);
+        public void DayItemClickListener(String s, DayDialog ref);
     }
 
 }

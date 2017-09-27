@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,28 +16,28 @@ import java.util.ArrayList;
  * Created by TaimoorTahir on 23/09/2017.
  */
 
-public class MyCategoryDialog extends Dialog implements CategoryAdapter.OnBack {
+public class CategoryDialog extends Dialog implements CategoryAdapter.OnBack {
 
     RecyclerView categoryRecycler;
     CategoryAdapter cAdapter;
     private OnBack ob;
     CategoryModel c_model = new CategoryModel();
+    TextView titleTextView;
+    TextView descriptionTextView;
 
-    public MyCategoryDialog(@NonNull Context context) {
+    public CategoryDialog(@NonNull Context context) {
         super(context);
         setContentView(R.layout.activity_category_dialog);
+        titleTextView = (TextView) findViewById(R.id.title_textview);
+        descriptionTextView = (TextView) findViewById(R.id.desc_textview);
     }
 
-    public MyCategoryDialog(@NonNull Context context, @StyleRes int themeResId) {
+    public CategoryDialog(@NonNull Context context, @StyleRes int themeResId) {
         super(context, themeResId);
     }
 
-    protected MyCategoryDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
+    protected CategoryDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
-    }
-
-    public void myShow(){
-        show();
     }
 
     public void setCategoryList(ArrayList<CategoryModel> list){
@@ -52,11 +54,23 @@ public class MyCategoryDialog extends Dialog implements CategoryAdapter.OnBack {
         c_model.setCategory(s);
     }
 
+    public void setTitle(String title){
+        titleTextView.setText(title);
+    }
+
+    public void setDescription(String desc){
+        descriptionTextView.setText(desc);
+    }
+
+    public void setBackgroundcolor(int color){
+        titleTextView.setBackgroundColor(color);
+    }
+
     public void onOptionSelected(OnBack ob){
         this.ob = ob;
     }
 
-    public void setAdapter(ArrayList<CategoryModel> list){
+    private void setAdapter(ArrayList<CategoryModel> list){
         categoryRecycler = (RecyclerView) findViewById(R.id.recycler_category);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         categoryRecycler.setLayoutManager(mLayoutManager);
@@ -72,6 +86,6 @@ public class MyCategoryDialog extends Dialog implements CategoryAdapter.OnBack {
 
     public interface OnBack{
 
-        public void CategoryItemClickListener(String s, MyCategoryDialog ref);
+        public void CategoryItemClickListener(String s, CategoryDialog ref);
     }
 }

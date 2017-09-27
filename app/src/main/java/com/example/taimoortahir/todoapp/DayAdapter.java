@@ -10,14 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 
 import java.util.ArrayList;
-
-import static com.example.taimoortahir.todoapp.InputTask.MyPREFERENCES;
 
 /**
  * Created by TaimoorTahir on 15/09/2017.
@@ -51,7 +48,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
         this.d = str;
     }
 
-    public DayAdapter(Context myContext, ArrayList<DayModel> mydayList, TextView day, OnBack ob, MyDialog dialog){
+    public DayAdapter(Context myContext, ArrayList<DayModel> mydayList, TextView day, OnBack ob, DayDialog dialog){
         this.mContext = myContext;
         this.dayList = mydayList;
         this.ob = ob;
@@ -80,30 +77,54 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
         final DayModel dayObj = dayList.get(position);
 
         if(d == dayObj.getweekDay()){
-            holder.image_tick_d.setVisibility(View.VISIBLE);
-        }
-        ColorGenerator generator = ColorGenerator.MATERIAL;
-        int color1 = generator.getRandomColor();
-        TextDrawable.IBuilder builder = TextDrawable.builder()
-                .beginConfig()
-                .endConfig()
-                .round();
+            holder.image.setBackgroundColor(Color.BLACK);
+            ColorGenerator generator = ColorGenerator.MATERIAL;
+            int color1 = generator.getRandomColor();
+            TextDrawable.IBuilder builder = TextDrawable.builder()
+                    .beginConfig()
+                    .endConfig()
+                    .round();
 
-        TextDrawable weekDayImage = builder
-                .build(String.valueOf(dayObj.getweekDay().charAt(0)), color1); // radius in px
+            TextDrawable weekDayImage = builder
+                    .build(String.valueOf(dayObj.getweekDay().charAt(0)), color1); // radius in px
 
-        holder.image.setImageDrawable(weekDayImage);
-        holder.image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//            holder.image.setImageDrawable(weekDayImage);
+            holder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 //                SharedPreferences.Editor editor = sharedPreferences.edit();
 //                editor.putString("Day", dayObj.getweekDay());
 //                editor.commit();
 //                holder.image_tick.setVisibility(View.VISIBLE);
-                holder.image.setBackgroundColor(Color.BLACK);
-                ob.DayClickListener(dayObj.getweekDay());
-            }
-        });
+//                holder.image.setBackgroundColor(Color.BLACK);
+                    ob.DayClickListener(dayObj.getweekDay());
+                }
+            });
+        }
+        else {
+            ColorGenerator generator = ColorGenerator.MATERIAL;
+            int color1 = generator.getRandomColor();
+            TextDrawable.IBuilder builder = TextDrawable.builder()
+                    .beginConfig()
+                    .endConfig()
+                    .round();
+
+            TextDrawable weekDayImage = builder
+                    .build(String.valueOf(dayObj.getweekDay().charAt(0)), color1); // radius in px
+
+            holder.image.setImageDrawable(weekDayImage);
+            holder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                editor.putString("Day", dayObj.getweekDay());
+//                editor.commit();
+//                holder.image_tick.setVisibility(View.VISIBLE);
+//                holder.image.setBackgroundColor(Color.BLACK);
+                    ob.DayClickListener(dayObj.getweekDay());
+                }
+            });
+        }
     }
 
     @Override

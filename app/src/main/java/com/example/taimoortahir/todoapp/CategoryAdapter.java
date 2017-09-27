@@ -81,21 +81,36 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
        final CategoryModel categoryObj = categoryList.get(position);
 
         if (categ == categoryObj.getCategory()){
-            holder.image_tick_c.setVisibility(View.VISIBLE);
-        }
-        holder.image.setImageResource(categoryObj.getImage());
-        holder.category_text.setText(categoryObj.getCategory());
-        holder.category.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            holder.image.setBackgroundColor(Color.BLACK);
+//            holder.image.setImageResource(categoryObj.getImage());
+            holder.category_text.setText(categoryObj.getCategory());
+            holder.category.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 //                SharedPreferences.Editor editor = sharedPreferences.edit();
 //                editor.putString("Category", categoryObj.getCategory());
 //                editor.commit();
 ////                holder.image_tick_c.setVisibility(View.VISIBLE);
 //                holder.category.setBackgroundColor(Color.BLACK);
-                ob.CategoryClickListener(categoryObj.getCategory());
-            }
-        });
+                    ob.CategoryClickListener(categoryObj.getCategory());
+                }
+            });
+        }
+        else {
+            holder.image.setImageResource(categoryObj.getImage());
+            holder.category_text.setText(categoryObj.getCategory());
+            holder.category.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                editor.putString("Category", categoryObj.getCategory());
+//                editor.commit();
+////                holder.image_tick_c.setVisibility(View.VISIBLE);
+//                holder.category.setBackgroundColor(Color.BLACK);
+                    ob.CategoryClickListener(categoryObj.getCategory());
+                }
+            });
+        }
     }
 
     @Override

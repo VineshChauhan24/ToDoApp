@@ -1,10 +1,7 @@
 package com.example.taimoortahir.todoapp;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -13,19 +10,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
-
-
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class InputTask extends AppCompatActivity implements View.OnClickListener, TaskAdapter.onBack, MyCategoryDialog.OnBack, MyDialog.OnBack {
+public class InputTask extends AppCompatActivity implements View.OnClickListener, TaskAdapter.onBack, CategoryDialog.OnBack, DayDialog.OnBack {
 
     String data;
     TextView t_date, t_time, txt1, txt2, task;
@@ -43,6 +36,8 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     SharedPreferences sharedpreferences;
     ImageView iv_c;
     ImageView iv_d;
+    String str_d;
+    String str_c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,22 +172,37 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     private void updateDate() {
         prepareDayList();
 
-        MyDialog openDialog = new MyDialog(this);
+        DayDialog openDialog = new DayDialog(this);
+        if(str_d == null){
+            openDialog.setDefaultDay("Monday");
+        }
+        else{
+            openDialog.setDefaultDay(str_d);
+        }
+        openDialog.setTitle("Day");
+        openDialog.setDescription("Select day for your task");
+        openDialog.setBackgroundcolor(R.color.orange);
         openDialog.setDayList(dayList);
         openDialog.onOptionSelected(this);
-        openDialog.setDefaultDay("Monday");
         openDialog.show();
-
     }
 
     private void updateTime() {
         prepareCategoryList();
 
-        MyCategoryDialog openDialog = new MyCategoryDialog(this);
+        CategoryDialog openDialog = new CategoryDialog(this);
+        if(str_c == null){
+            openDialog.setDefaultCategory("Exercise");
+        }
+        else{
+            openDialog.setDefaultCategory(str_c);
+        }
+        openDialog.setTitle("Category");
+        openDialog.setDescription("Select category for your task");
+        openDialog.setBackgroundcolor(Color.parseColor("#FFA500"));
         openDialog.setCategoryList(categoryList);
         openDialog.onOptionSelected(this);
-        openDialog.setDefaultCategory("Monday");
-        openDialog.myShow();
+        openDialog.show();
 
     }
 
@@ -228,19 +238,21 @@ public class InputTask extends AppCompatActivity implements View.OnClickListener
     }
 
     @Override
-    public void CategoryItemClickListener(String s, MyCategoryDialog ref) {
+    public void CategoryItemClickListener(String s, CategoryDialog ref) {
+        this.str_c = s;
         ref.setDefaultCategory(s);
         txt2.setText(s);
         ref.dismiss();
     }
 
     @Override
-    public void DayItemClickListener(String s, MyDialog ref) {
+    public void DayItemClickListener(String s, DayDialog ref) {
 //        SharedPreferences.Editor editor = sharedpreferences.edit();
 //
 //        editor.putString("Day", s);
 //        editor.commit();
-        ref.setDefaultDay(s);
+        this.str_d = s;
+        ref.setDefaultDay(str_d);
         txt1.setText(s);
         ref.dismiss();
     }
