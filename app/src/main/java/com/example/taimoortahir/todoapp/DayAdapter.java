@@ -77,7 +77,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.MyViewHolder> {
         final DayModel dayObj = dayList.get(position);
 
         if(d == dayObj.getweekDay()){
-            holder.image.setBackgroundColor(Color.BLACK);
+            holder.image.setBackgroundResource(R.drawable.ic_done_white_24dp);
             ColorGenerator generator = ColorGenerator.MATERIAL;
             int color1 = generator.getRandomColor();
             TextDrawable.IBuilder builder = TextDrawable.builder()
